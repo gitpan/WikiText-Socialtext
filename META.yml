@@ -15,4 +15,4 @@ no_index:
 requires: 
   WikiText: 0.06
   perl: 5.6.1
-version: 0.05
+version: 0.06
