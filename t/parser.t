@@ -1,7 +1,7 @@
 use lib '../WikiText/lib';
 use t::TestWikiText;
 
-plan tests => 19;
+plan tests => 21;
 
 #no_diff;
 
@@ -13,6 +13,35 @@ filters({wikitext => 'parse_wikitext'});
 run_is 'wikitext' => 'wikibyte';
 
 __DATA__
+=== Old lists
+
+--- wikitext
+- one
+- two
+--- wikibyte
++ul
++li
+ one
+-li
++li
+ two
+-li
+-ul
+
+=== Headers Without Spaces
+
+--- wikitext
+^^Welcome to the Workspace
+
+blah blah
+--- wikibyte
++h2
+ Welcome to the Workspace
+-h2
++p
+ blah blah
+-p
+
 === Multiline Paragraphs
 
 --- wikitext

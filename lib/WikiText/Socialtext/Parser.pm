@@ -98,18 +98,18 @@ sub create_grammar {
         },
 
         hx => {
-            match => qr/^(\^+) +(.*?)(\s+=+)?\s*?\n+/,
+            match => qr/^(\^+) *(.*?)(\s+=+)?\s*?\n+/,
             filter => sub {
                 my $node = shift;
                 $node->{type} = 'h' . length($node->{1});
-                $_ = $node->{2};
+                $_ = $node->{text} = $node->{2};
             },
         },
 
         ul => {
-            match => re_list('\*'),
+            match => re_list('[\*\-\+]'),
             blocks => [qw(ul ol subl li)],
-            filter => sub { s/^[\*\#] *//mg },
+            filter => sub { s/^[\*\-\+\#] *//mg },
         }, 
 
         ol => {
@@ -301,7 +301,7 @@ sub re_list {
     return qr/^(            # Block must start at beginning
                             # Capture everything in $1
         ^$bullet+\ .*\n     # Line starting with one or more bullet
-        (?:[\*\#]+\ .*\n)*  # Lines starting with '*' or '#'
+        (?:[\*\-\+\#]+\ .*\n)*  # Lines starting with '*' or '#'
     )(?:\s*\n)?/x,          # Eat trailing lines
 }
 
