@@ -28,7 +28,15 @@ sub create_grammar {
         qw(waflphrase asis wikilink a im mail tt b i del)
     ];
     my $all_blocks = [
-        qw(pre wafl_block hr hx waflparagraph ul ol blockquote table p empty)
+        qw(
+            pre wafl_block
+            hr hx
+            waflparagraph
+            ul ol
+            blockquote table
+            p empty
+            else
+        )
     ];
 
     return {
@@ -69,6 +77,15 @@ sub create_grammar {
             /x,
             phrases => $all_phrases,
             filter => sub { chomp },
+        },
+
+        else => {
+            match => qr/^(.*)\n/,
+            phrases => [],
+            filter => sub {
+                my $node = shift;
+                $node->{type} = 'p';
+            },
         },
 
         pre => {

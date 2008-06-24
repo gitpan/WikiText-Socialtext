@@ -1,7 +1,7 @@
 use lib '../WikiText/lib';
 use t::TestWikiText;
 
-plan tests => 21;
+plan tests => 22;
 
 #no_diff;
 
@@ -416,3 +416,17 @@ This is both *_Bold and Italic_*
 -i
 -b
 -p
+
+=== Bad Markup
+--- wikitext
+| *foo* | bar
+
+baz
+--- wikibyte
++p
+ | *foo* | bar
+-p
++p
+ baz
+-p
+
