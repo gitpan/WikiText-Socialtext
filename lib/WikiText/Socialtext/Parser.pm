@@ -116,6 +116,7 @@ sub create_grammar {
 
         hx => {
             match => qr/^(\^+) *(.*?)(\s+=+)?\s*?\n+/,
+            phrases => $all_phrases,
             filter => sub {
                 my $node = shift;
                 $node->{type} = 'h' . length($node->{1});
@@ -188,7 +189,6 @@ sub create_grammar {
         },
 
         wikilink => {
-            type => 'a',
             match => qr/
                 (?:"([^"]*)"\s*)?(?:^|(?<=[^$ALPHANUM]))\[(?=[^\s\[\]])
                 (.*?)
@@ -269,6 +269,7 @@ sub create_grammar {
         },
 
         a => {
+            type => 'hyperlink',
             match => qr{
                 (?:"([^"]*)"\s*)?
                 <?
@@ -283,7 +284,7 @@ sub create_grammar {
             filter => sub {
                 my $node = shift;
                 $_ = $node->{1} || $node->{2};
-                $node->{attributes}{href} = $node->{2};
+                $node->{attributes}{target} = $node->{2};
             },
         },
 

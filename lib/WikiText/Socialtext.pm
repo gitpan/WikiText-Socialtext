@@ -2,9 +2,11 @@ package WikiText::Socialtext;
 use base 'WikiText';
 
 use 5.006.001;
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 1;
+
+=encoding utf-8
 
 =head1 NAME
 
@@ -26,7 +28,7 @@ Ingy döt Net <ingy@cpan.org>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2008. Ingy döt Net.
+Copyright (c) 2008, 2010. Ingy döt Net.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
