@@ -1,8 +1,8 @@
 use t::TestWikiText;
 
-plan tests => 2;
+plan tests => 1;
 
-no_diff;
+#no_diff;
 
 $t::TestWikiText::parser_module = 'WikiText::Socialtext::Parser';
 $t::TestWikiText::emitter_module = 'WikiText::WikiByte::Emitter';
@@ -12,39 +12,17 @@ filters({wikitext => 'parse_wikitext'});
 run_is 'wikitext' => 'wikibyte';
 
 __DATA__
-=== Spaces at the end of a row.
+=== Old lists
 
 --- wikitext
-| foo | 
-| bar |
+http://example.com "awesomeness"<http://awesome.com>
 --- wikibyte
-+table
-+tr
-+td
- foo
--td
--tr
-+tr
-+td
- bar
--td
--tr
--table
-
-=== 2nd row, not a row
-
---- wikitext
-| foo |
-| bar |x
---- wikibyte
-+table
-+tr
-+td
- foo
--td
--tr
--table
 +p
- | bar |x
++hyperlink target="http://example.com"
+ http://example.com
+-hyperlink
+  
++hyperlink target="http://awesome.com"
+ awesomeness
+-hyperlink
 -p
-
