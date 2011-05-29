@@ -20,8 +20,7 @@ no_index:
     - t
 requires:
   Filter::Util::Call: 0
-  WikiText: 0.11
   perl: 5.8.3
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.17
+version: 0.18
